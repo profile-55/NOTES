@@ -31,6 +31,11 @@ class Task(BaseModel):
 app=FastAPI()
 db=SessionLocal()
 
+@app.get('/')
+def foo():
+    return('Hello')
+
+
 @app.get('/tasks',response_model=List[Task], status_code=200)
 def get_tasks():
     tasks=db.query(models.Task).all()
