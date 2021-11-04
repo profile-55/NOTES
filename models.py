@@ -13,4 +13,4 @@ class Task(Base):
     param_2=Column(Integer, nullable=False)
 
     def __repr__(self):
-        return f"<Item name={self.name} price={self.price}>"
+        return f"<Task task_uuid={self.task_uuid} description={self.description} param_1={self.param_1} param_2={self.param_2}>"
