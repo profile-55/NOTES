@@ -11,6 +11,8 @@ from uuid import uuid4
 from typing_extensions import Annotated
 
 class Param(BaseModel):
+
+    # param_1 (sid), param_2 (version)
     param_1: str
     param_2: int
 
@@ -40,7 +42,7 @@ def get_tasks():
 
 @app.post('/tasks/add',response_model=Task, status_code=status.HTTP_201_CREATED)
 def create_task(task:Task):
-    db_item=db.query(models.Item).filter(models.Item.name==task.task_uuid).first()
+    db_item=db.query(models.Task).filter(models.Task.name==task.task_uuid).first()
 
     if db_item is not None:
         raise HTTPException(status_code=400, detail="Task already exists")
