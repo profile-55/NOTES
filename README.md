@@ -5,8 +5,6 @@ SQLAlchemy is a package that makes it easier for Python programs to communicate 
 
 Many web, mobile, geospatial, and analytics applications use PostgreSQL as their primary data storage or data warehouse.
 
-This is code I wrote for the [video](https://youtu.be/2g1ZjA6zHRo)
-
 ## How to run the REST API
 Get this project from Github
 ``` 

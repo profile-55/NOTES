@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from sqlalchemy.sql.expression import null
 from database import Base
 from sqlalchemy import Boolean, Integer, String, Text, Column

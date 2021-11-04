@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
 
 from pydantic import BaseModel, Field, ValidationError
-from uuid import uuid4
 from typing_extensions import Annotated
+from uuid import uuid4
+
 
 class Param(BaseModel):
     param_1: str
     param_2: int
 
+
 class Task(BaseModel):
     task_uuid: Annotated[str, Field(default_factory=lambda: uuid4().hex)]
     description: str
     params: Param
+
 
 def parse_json(input_json):
     try:
@@ -20,6 +23,7 @@ def parse_json(input_json):
         print(e.json())
     else:
         return task
+
 
 if __name__ == '__main__':
 

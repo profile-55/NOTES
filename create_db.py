@@ -1,5 +1,7 @@
-from database import Base,engine
-# from models import Task
+# -*- coding: utf-8 -*-
+
+from database import Base, engine
+from models import Task
 
 print("Creating database ....")
 

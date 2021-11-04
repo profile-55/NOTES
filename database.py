@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -12,3 +14,9 @@ db_params = {'db_name': DATABASE_NAME, 'db_user': DATABASE_USER, 'db_password': 
 engine=create_engine("postgresql://{db_user}:{db_password}@localhost/{db_name}".format(**db_params), echo=True)
 Base=declarative_base()
 SessionLocal=sessionmaker(bind=engine)
+
+if __name__ == "__main__":
+
+    print(engine)
+    print(Base)
+    print(SessionLocal)
