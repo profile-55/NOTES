@@ -88,8 +88,11 @@ def update_task(task_sid:str, task:Task):
     print('TASK_SID: ', task_sid)
     #print('task: ', task)
     #print('first_!')
-    task_to_update = db.query(models.Task).filter(models.Task.param_1 == task_sid).first()
-    #print('find!!!')
+
+    #valid_tasks = db.query(models.Task).filter(models.Task.param_1 == task_sid).all()
+    #max_param_2 = max([task.param_2 for task in valid_tasks])
+
+    task_to_update = db.query(models.Task).filter(models.Task.param_1 == task_sid).order_by(models.Task.param_2.desc()).first()
     task_to_update.task_uuid = task.task_uuid
     task_to_update.description = task.description
     task_to_update.param_1 = task.param_1

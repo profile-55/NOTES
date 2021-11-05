@@ -58,8 +58,8 @@ if __name__ == '__main__':
     # Изменяем существующую запись и выводим результат:
     task_desc = """
         {
-            "task_uuid": "025673ecbfb44be8856341e34af82ea8",
-            "description": "new_text",
+            "task_uuid": "125673ecbfb44be8856341e34af82ea8",
+            "description": "new_text_2",
             "params": {
                 "param_1": "1",
                 "param_2": 1
