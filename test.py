@@ -9,7 +9,7 @@ if __name__ == '__main__':
 
     task_1 = """
     {
-        "task_uuid": "79bdcb3b9f20444f9e7cffcc46eb9449",
+        "task_uuid": "79bdcb3b9f20444f9e7cffcc46eb9455",
         "description": "34125125",
         "params": {
             "param_1": "1",

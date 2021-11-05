@@ -48,24 +48,18 @@ def get_tasks():
 
     db_tasks = db.query(models.Task).all()
     print('get_tasks: ', db_tasks)
-    # except:
-    #     print('Ошибка при запросе к базе. Возможно база пустая')
 
     return db_tasks
-    #return 'fjsdlkfjskj'
 
 
 @app.post('/tasks/add', response_model=Task, status_code=status.HTTP_201_CREATED)
-# @app.post('/tasks/add')
-# @app.post('/tasks/add')
-# def create_task(task:Task):
 def create_task(task: Task):
     # def create_task(task:Task):
 
     db_task = db.query(models.Task).filter(models.Task.task_uuid == task.task_uuid).first()
 
-    if db_task is not None:
-        raise HTTPException(status_code=400, detail="Task already exists")
+    #if db_task is not None:
+        #raise HTTPException(status_code=400, detail="Task already exists")
 
     new_task = models.Task(
         task_uuid=task.task_uuid,
@@ -76,12 +70,11 @@ def create_task(task: Task):
         # param_2 = task.param_2
     )
 
-    # db.add(new_task)
-    # db.commit()
+    db.add(new_task)
+    db.commit()
 
-    # return new_task
+    return new_task
     # return task
-    pass
 
 
 # sid = 'S-1-5-21-500000003-1000000000-1000000003-1001'
