@@ -1,0 +1,62 @@
+# Версия Docker API:
+version: '3.7'
+
+# Сервисы:
+services:
+
+  # База данных:
+  database:
+
+    # Имя контейнера:
+    container_name:
+      database
+
+    # Образ для запуска:
+    image: postgres:latest
+
+    #volumes:
+    #  - postgres_data:/var/lib/postgresql/data/
+
+    # Переменные окружения:
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=newp55!
+      - POSTGRES_DB=tasks_base
+
+    # Открываем снаружи порт 5432:
+    ports:
+      - "5432:5432"
+
+  # Сервер:
+  server:
+
+    # Имя контейнера:
+    container_name:
+      server
+
+    #
+    build:
+      context: ./
+      dockerfile: Dockerfile
+
+    #command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./app/:/usr/src/app/
+
+    # Пробрасываем порт 8000 хоста в порт 8000 контейнера:
+    ports:
+      - 8000:8000
+
+    # Перезапуск сервера в случае падения:
+    #restart:
+    #  always
+
+    #env_file:
+    #  - ./.env.dev
+
+    # Сервисы, которые запускаются перед данным сервисом:
+    depends_on:
+      - database
+
+volumes:
+  postgres_data:
