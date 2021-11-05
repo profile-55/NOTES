@@ -17,7 +17,8 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Подумать нужен ли --reload, если контейнер и так перезагружается:
-CMD ["uvicorn", "main:app --reload"]
+CMD ["python", "create_db.py"]
+CMD ["uvicorn", "main:app"]
 # CMD ["python", "test.py"]
 
 # Copy project
