@@ -38,6 +38,20 @@ if __name__ == '__main__':
     }
     """
 
+    task_1 = """
+            {
+                "task_uuid": "79bdcb3b9f20444f9e7cffcc46eb9449",
+                "description": "Test desc_1",
+                "params": {
+                "param_1": "1",
+                "param_2": 1
+            }
+            }
+        """
+
+    task = parse_json(task_1)
+    print(task)
+
     task = parse_json(input_json)
     print(task)
 
