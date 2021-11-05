@@ -5,10 +5,41 @@ SQLAlchemy is a package that makes it easier for Python programs to communicate 
 
 Many web, mobile, geospatial, and analytics applications use PostgreSQL as their primary data storage or data warehouse.
 
+# 1: Подготовка сервера:
+
+## 1.1: Установа Docker в Ubuntu 20.04:
+
+## 1.2: Установка Docker Compose в Ubuntu 20.04:
+Установить Docker Compose можно из официального репозитория Ubuntu, однако тогда вы получите не самую свежую версию, потому лучше установить программу из GitHub-репозитория Docker.
+
+Найдите ссылку на свежий релиз на этой странице. На данный момент это версия 1.26.0.
+
+Следующая команда загрузит эту версию и сохранит исполняемый файл в /usr/local/bin/docker-compose, что сделает его глобально доступным как docker-compose:
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
+
+Теперь установите права и сделайте файл исполняемым:
+```
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+Запросите версию программы, чтобы убедиться, что установка прошла успешно:
+```
+docker-compose --version
+```
+
+Команда должна вернуть что-то вроде:
+```
+docker-compose version 1.26.0, build 8a1c60f6
+```
+
+# GitHub:
+
 ## How to run the REST API
 Get this project from Github
 ``` 
-git clone https://github.com/jod35/Build-a-fastapi-and-postgreSQL-API-with-SQLAlchemy
+git clone https://github.com/profile-55/NOTES.git
  
 ```
 
