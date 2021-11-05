@@ -56,7 +56,8 @@ def get_tasks():
 def create_task(task: Task):
     # def create_task(task:Task):
 
-    db_task = db.query(models.Task).filter(models.Task.task_uuid == task.task_uuid).first()
+    # TODO:
+    #db_task = db.query(models.Task).filter(models.Task.task_uuid == task.task_uuid).first()
 
     #if db_task is not None:
         #raise HTTPException(status_code=400, detail="Task already exists")
@@ -74,14 +75,21 @@ def create_task(task: Task):
     db.commit()
 
     return new_task
-    # return task
 
 
 # sid = 'S-1-5-21-500000003-1000000000-1000000003-1001'
 
-@app.put('/tasks/{task_sid}', response_model=Task, status_code=status.HTTP_200_OK)
-def update_task(task_sid: int, task: Task):
-    task_to_update = db.query(models.Task).filter(models.Task.id == task_sid).first()
+#@app.put('/tasks/{task_sid}', response_model=Task, status_code=status.HTTP_200_OK)
+@app.put('/tasks/{task_sid}')
+#def update_task(task_sid: int, task):
+
+
+def update_task(task_sid:str, task:Task):
+    print('TASK_SID: ', task_sid)
+    #print('task: ', task)
+    #print('first_!')
+    task_to_update = db.query(models.Task).filter(models.Task.param_1 == task_sid).first()
+    #print('find!!!')
     task_to_update.task_uuid = task.task_uuid
     task_to_update.description = task.description
     task_to_update.param_1 = task.param_1
@@ -90,3 +98,4 @@ def update_task(task_sid: int, task: Task):
     db.commit()
 
     return task_to_update
+    #return task
