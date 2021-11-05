@@ -12,7 +12,11 @@ services:
       database
 
     # Образ для запуска:
-    image: postgres:latest
+    #image: postgres:latest
+
+    build:
+      context: ./
+      dockerfile: Dockerfile-Postgres
 
     #volumes:
     #  - postgres_data:/var/lib/postgresql/data/
@@ -25,9 +29,9 @@ services:
 
     # Открываем снаружи порт 5432:
     #expose:
-      #- "5432"
+    #  - "5432"
     ports:
-      - 5432:5432
+      - "5432:5432"
     #networks:
     #  - default
 

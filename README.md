@@ -37,15 +37,13 @@ docker-compose version 1.26.0, build 8a1c60f6
 # GitHub:
 
 ## How to run the REST API
-Get this project from Github
+Клонируем проект в локальную директорию:
 ``` 
 git clone https://github.com/profile-55/NOTES.git
  
 ```
 
-
-
-### Setting up the database
+### 
 
 * Install PostgreSQL and create your user and database
 
@@ -86,6 +84,3 @@ pip install -r requirements.txt
 
 ## Run the API
 ``` python main.py ```
-
-## Author 
-[Ssali Jonathan](https://github.com/jod35)

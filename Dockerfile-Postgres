@@ -1,0 +1,17 @@
+# Pull official base image
+FROM postgres:latest
+
+# Set work directory
+WORKDIR /usr/src/app
+
+# Set environment variables
+#ENV PYTHONDONTWRITEBYTECODE 1
+#ENV PYTHONUNBUFFERED 1
+
+# Install dependencies
+RUN docker run --name notes-postgres -e POSTGRES_PASSWORD=newp55! -e POSTGRES_DB=tasks_base -d -p 5432:5432 postgres:latest
+#COPY ./create_db .
+#R
+
+#
+COPY . .
