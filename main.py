@@ -42,16 +42,17 @@ def foo():
     return ('Hello')
 
 
-@app.get('/tasks', response_model=List[Task], status_code=200)
-# @app.get('/tasks')
+#@app.get('/tasks', response_model=List[Task], status_code=200)
+@app.get('/tasks')
 def get_tasks():
+
     db_tasks = db.query(models.Task).all()
     print('get_tasks: ', db_tasks)
     # except:
     #     print('Ошибка при запросе к базе. Возможно база пустая')
 
     return db_tasks
-    # return 'fjsdlkfjskj'
+    #return 'fjsdlkfjskj'
 
 
 @app.post('/tasks/add', response_model=Task, status_code=status.HTTP_201_CREATED)
