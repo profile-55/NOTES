@@ -34,16 +34,29 @@ docker-compose version 1.26.0, build 8a1c60f6
 
 # 2 Запуск проекта на сервере
 
-## Как запустить проект
+### Счачиваем проект с GitHub:
 Клонируем проект в локальную директорию:
 ``` 
 git clone https://github.com/profile-55/NOTES.git
  
 ```
 
-### Запускаем базу данных Postgres в Docker
+### Устанавливаем виртульное окружение для проекта:
+Добавляем виртуальное окружение в папку проекта:
 ```
-sudo docker run -e POSTGRES_PASSWORD=newp55! -e POSTGRES_DB=tasks_base -d -p 5432:5432 postgres:latest
+python -m venv path/to/project/venv
+```
+Активируем его:
+```
+cd path/to/project/
+venv/Sctipts/activate.bat (для Windows)
+venv/bin/activate (для Linux)
+```
+
+## Запуск Docker-контейнеров
+### Запускаем контейнер для Postgres:
+```
+sudo docker run -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=newp55! -e POSTGRES_DB=tasks_base -d -p 5432:5432 postgres:latest
 ```
 
 ### Собираем Docker-образ для python и uvicorn
@@ -52,7 +65,7 @@ sudo docker run -e POSTGRES_PASSWORD=newp55! -e POSTGRES_DB=tasks_base -d -p 543
 sudo docker build . -t app_uvicorn
 ```
 
-### Запускаем uvicorn-сервер
+После запускаем uvicorn-сервер
 ```
 sudo docker run -p 8000:8000 app_uvicorn
 ```
