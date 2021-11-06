@@ -49,12 +49,12 @@ sudo docker run -e POSTGRES_PASSWORD=newp55! -e POSTGRES_DB=tasks_base -d -p 543
 ### Собираем Docker-образ для python и uvicorn
 Для того чтобы собрать Docker-образ переходим в каталог, содержащий Dockerfile, и выполняем следующую команду:
 ```
-sudo docker build .
+sudo docker build . -t app_uvicorn
 ```
 
 ### Запускаем uvicorn-сервер
 ```
-sudo docker run -p 8000:8000 ...
+sudo docker run -p 8000:8000 app_uvicorn
 ```
 
 
