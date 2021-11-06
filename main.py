@@ -37,13 +37,12 @@ app = FastAPI()
 db = SessionLocal()
 
 
-@app.get('/', status_code=200)
+@app.get('/', status_code=status.HTTP_200_OK)
 def foo():
-    return ('Hello from FastAPI!')
+    return 'Hello from FastAPI!'
 
 
-#@app.get('/tasks')
-@app.get('/tasks', response_model=List[Task], status_code=200)
+@app.get('/tasks', response_model=List[Task], status_code=status.HTTP_200_OK)
 def get_tasks():
 
     all_tasks = db.query(models.Task).all()
@@ -70,15 +69,13 @@ def create_task(task: Task):
     db_task = db.query(models.Task).filter(models.Task.task_uuid == task.task_uuid).first()
 
     if db_task is not None:
-        raise HTTPException(status_code=400, detail="Task already exists")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Задача уже была добавлена ранее!")
 
     new_task = models.Task(
         task_uuid=task.task_uuid,
         description=task.description,
         param_1=task.params.param_1,
         param_2=task.params.param_2
-        # param_1 = task.param_1,
-        # param_2 = task.param_2
     )
 
     db.add(new_task)
