@@ -49,9 +49,19 @@ def get_tasks():
     all_tasks = db.query(models.Task).all()
     print('get_tasks: ', all_tasks)
 
-    res = {}
+    res = []
+    for curr_task in all_tasks:
+        elem = {
+            "task_uuid": curr_task.task_uuid,
+            "description": curr_task.description,
+            "params": {
+                "param_1": curr_task.param_1,
+                "param_2": curr_task.param_2
+            }
+        }
+        res.append(elem)
 
-    return all_tasks
+    return res
 
 
 @app.post('/tasks/add', response_model=Task, status_code=status.HTTP_201_CREATED)
