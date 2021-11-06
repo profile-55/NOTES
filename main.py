@@ -92,11 +92,12 @@ def create_task(task: Task):
 @app.put('/tasks/{task_sid}', status_code=status.HTTP_204_NO_CONTENT)
 def update_task(task_sid:str, task:Task):
     print('TASK_SID: ', task_sid)
-    #print('task: ', task)
-    #print('first_!')
 
-    #valid_tasks = db.query(models.Task).filter(models.Task.param_1 == task_sid).all()
-    #max_param_2 = max([task.param_2 for task in valid_tasks])
+    # Проверка на повторение uuid:
+    db_task = db.query(models.Task).filter(models.Task.task_uuid == task.task_uuid).first()
+
+    if db_task is not None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="В запросе повторяется uuid!")
 
     task_to_update = db.query(models.Task).filter(models.Task.param_1 == task_sid).order_by(models.Task.param_2.desc()).first()
     task_to_update.task_uuid = task.task_uuid
@@ -105,6 +106,7 @@ def update_task(task_sid:str, task:Task):
     task_to_update.param_2 = task.params.param_2
 
     db.commit()
-    print(task)
+    #print(task)
+    #res = ''
 
-    return '{}'
+    #return res
