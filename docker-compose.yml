@@ -31,9 +31,9 @@ services:
     #expose:
     #  - "5432"
     ports:
-      - "5432:5432"
-    networks:
-      - net
+      - 5432:5432
+#    networks:
+#      - net
 
   # Сервер:
   server:
@@ -53,10 +53,13 @@ services:
 
     # Пробрасываем порт 8000 хоста в порт 8000 контейнера:
     ports:
-      - "8000:8000"
+      - 8000:8000
 
-    networks:
-      - net
+    links:
+      - database
+
+#    networks:
+#      - net
 
     # Перезапуск сервера в случае падения:
     #restart:
@@ -65,18 +68,21 @@ services:
     #env_file:
     #  - ./.env.dev
 
+    environment:
+      POSTGRES_HOST: database
+
     # Сервисы, которые запускаются перед данным сервисом:
-    depends_on:
-      - database
+    #depends_on:
+    #  - database
 
 
-networks:
-  net:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.220.0/24
+#networks:
+#  net:
+#    driver: bridge
+#    ipam:
+#      driver: default
+#      config:
+        #- subnet: 192.168.220.0/24
 
 
 #volumes:
