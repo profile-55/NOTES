@@ -1,15 +1,13 @@
-# Build a REST API with FastAPI, PostgreSQL and SQLAlchemy
+# REST API приложение с испольлзование FastAPI, PostgreSQL и SQLAlchemy
 FastAPI is a Python framework and set of tools that allow developers to invoke commonly used functions using a REST interface. 
 
 SQLAlchemy is a package that makes it easier for Python programs to communicate with databases. Most of the time, this library is used as an Object Relational Mapper (ORM) tool, which automatically converts function calls to SQL queries and translates Python classes to tables on relational databases.
 
-Many web, mobile, geospatial, and analytics applications use PostgreSQL as their primary data storage or data warehouse.
+# 1 Подготовка сервера
 
-# 1: Подготовка сервера:
+## 1.1 Установа Docker в Ubuntu 20.04
 
-## 1.1: Установа Docker в Ubuntu 20.04:
-
-## 1.2: Установка Docker Compose в Ubuntu 20.04:
+## 1.2 Установка Docker Compose в Ubuntu 20.04
 Установить Docker Compose можно из официального репозитория Ubuntu, однако тогда вы получите не самую свежую версию, потому лучше установить программу из GitHub-репозитория Docker.
 
 Найдите ссылку на свежий релиз на этой странице. На данный момент это версия 1.26.0.
@@ -34,53 +32,34 @@ docker-compose --version
 docker-compose version 1.26.0, build 8a1c60f6
 ```
 
-# GitHub:
+# 2 Запуск проекта на сервере
 
-## How to run the REST API
+## Как запустить проект
 Клонируем проект в локальную директорию:
 ``` 
 git clone https://github.com/profile-55/NOTES.git
  
 ```
 
-### 
-
-* Install PostgreSQL and create your user and database
-
-* Change this line in ` database.py ` to 
-
-``` 
-engine=create_engine("postgresql://{YOUR_DATABASE_USER}:{YOUR_DATABASE_PASSWORD}@localhost/{YOUR_DATABASE_NAME}",
-    echo=True
-)
+### Запускаем базу данных Postgres в Docker
+```
+sudo docker run -e POSTGRES_PASSWORD=newp55! -e POSTGRES_DB=tasks_base -d -p 5432:5432 postgres:latest
 ```
 
-### Create a virtual environment
-This can be done with 
-``` python -m venv env ```
-
-activate the virtual environment with 
-
-``` 
-env/bin/activate
+### Собираем Docker-образ для python и uvicorn
+Для того чтобы собрать Docker-образ переходим в каталог, содержащий Dockerfile, и выполняем следующую команду:
+```
+sudo docker build .
 ```
 
-or 
-
+### Запускаем uvicorn-сервер
 ```
-env\Scripts\activate
+sudo docker run -p 8000:8000 ...
 ```
 
 
+# 3 Тесты
+### Переходим в контейнер
 
-### Install the requirements 
+### Тестируем приложение
 
-``` 
-pip install -r requirements.txt
-```
-
-### Create the database
-``` python create_db.py ```
-
-## Run the API
-``` python main.py ```

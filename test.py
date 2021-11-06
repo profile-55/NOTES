@@ -48,11 +48,11 @@ if __name__ == '__main__':
 
 
     # Добавляем новую задачу и возвращаем результат:
-    #res = requests.post('http://127.0.0.1:8000/tasks/add', json=task_1)
-    #print('/tasks/add: ', res.content)
+    res = requests.post('http://127.0.0.1:8000/tasks/add', json=task_1)
+    print('/tasks/add: ', res.content)
 
-    #res = requests.get('http://127.0.0.1:8000/tasks')
-    #print('/tasks: ', res.content)
+    res = requests.get('http://127.0.0.1:8000/tasks')
+    print('/tasks: ', res.content)
 
 
     # Изменяем существующую запись и выводим результат:
