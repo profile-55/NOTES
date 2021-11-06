@@ -37,30 +37,30 @@ app = FastAPI()
 db = SessionLocal()
 
 
-@app.get('/')
+@app.get('/', status_code=200)
 def foo():
-    return ('Hello')
+    return ('Hello from FastAPI!')
 
 
-#@app.get('/tasks', response_model=List[Task], status_code=200)
-@app.get('/tasks')
+#@app.get('/tasks')
+@app.get('/tasks', response_model=List[Task], status_code=200)
 def get_tasks():
 
-    db_tasks = db.query(models.Task).all()
-    print('get_tasks: ', db_tasks)
+    all_tasks = db.query(models.Task).all()
+    print('get_tasks: ', all_tasks)
 
-    return db_tasks
+    res = {}
+
+    return all_tasks
 
 
 @app.post('/tasks/add', response_model=Task, status_code=status.HTTP_201_CREATED)
 def create_task(task: Task):
-    # def create_task(task:Task):
 
-    # TODO:
-    #db_task = db.query(models.Task).filter(models.Task.task_uuid == task.task_uuid).first()
+    db_task = db.query(models.Task).filter(models.Task.task_uuid == task.task_uuid).first()
 
-    #if db_task is not None:
-        #raise HTTPException(status_code=400, detail="Task already exists")
+    if db_task is not None:
+        raise HTTPException(status_code=400, detail="Task already exists")
 
     new_task = models.Task(
         task_uuid=task.task_uuid,
@@ -74,16 +74,15 @@ def create_task(task: Task):
     db.add(new_task)
     db.commit()
 
-    return new_task
+    return task
 
 
 # sid = 'S-1-5-21-500000003-1000000000-1000000003-1001'
-
 #@app.put('/tasks/{task_sid}', response_model=Task, status_code=status.HTTP_200_OK)
-@app.put('/tasks/{task_sid}')
 #def update_task(task_sid: int, task):
 
 
+@app.put('/tasks/{task_sid}', status_code=status.HTTP_204_NO_CONTENT)
 def update_task(task_sid:str, task:Task):
     print('TASK_SID: ', task_sid)
     #print('task: ', task)
@@ -95,10 +94,10 @@ def update_task(task_sid:str, task:Task):
     task_to_update = db.query(models.Task).filter(models.Task.param_1 == task_sid).order_by(models.Task.param_2.desc()).first()
     task_to_update.task_uuid = task.task_uuid
     task_to_update.description = task.description
-    task_to_update.param_1 = task.param_1
-    task_to_update.param_2 = task.param_2
+    task_to_update.param_1 = task.params.param_1
+    task_to_update.param_2 = task.params.param_2
 
     db.commit()
+    print(task)
 
-    return task_to_update
-    #return task
+    return '{}'
