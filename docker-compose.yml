@@ -12,11 +12,11 @@ services:
       database
 
     # Образ для запуска:
-    #image: postgres:latest
+    image: postgres:latest
 
-    build:
-      context: ./
-      dockerfile: Dockerfile-Postgres
+    #build:
+      #context: ./
+      #dockerfile: Dockerfile-Postgres
 
     #volumes:
     #  - postgres_data:/var/lib/postgresql/data/
@@ -32,8 +32,8 @@ services:
     #  - "5432"
     ports:
       - "5432:5432"
-    #networks:
-    #  - default
+    networks:
+      - net
 
   # Сервер:
   server:
@@ -55,6 +55,9 @@ services:
     ports:
       - "8000:8000"
 
+    networks:
+      - net
+
     # Перезапуск сервера в случае падения:
     #restart:
     #  always
@@ -66,5 +69,16 @@ services:
     depends_on:
       - database
 
-volumes:
-  postgres_data:
+
+networks:
+  net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.220.0/24
+
+
+#volumes:
+  #postgres_data:
+

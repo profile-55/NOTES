@@ -19,7 +19,7 @@ COPY . .
 # Подумать нужен ли --reload, если контейнер и так перезагружается:
 CMD ["python", "create_db.py"]
 #CMD ["uvicorn", "--host", "0.0.0.0", "--port", "8000", "main:app"]
-#CMD ["uvicorn", "main:app"]
+CMD ["uvicorn", "main:app"]
 # CMD ["python", "test.py"]
 
 # Copy project
