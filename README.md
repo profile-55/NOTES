@@ -5,9 +5,9 @@ SQLAlchemy is a package that makes it easier for Python programs to communicate 
 
 # 1 Подготовка сервера
 
-## 1.1 Установа Docker в Ubuntu 20.04
+### 1.1 Установа Docker в Ubuntu 20.04
 
-## 1.2 Установка Docker Compose в Ubuntu 20.04
+### 1.2 Установка Docker Compose в Ubuntu 20.04
 Установить Docker Compose можно из официального репозитория Ubuntu, однако тогда вы получите не самую свежую версию, потому лучше установить программу из GitHub-репозитория Docker.
 
 Найдите ссылку на свежий релиз на этой странице. На данный момент это версия 1.26.0.
@@ -34,14 +34,14 @@ docker-compose version 1.26.0, build 8a1c60f6
 
 # 2 Запуск проекта на сервере
 
-### Счачиваем проект с GitHub:
+### 2.1 Счачиваем проект с GitHub
 Клонируем проект в локальную директорию:
 ``` 
 git clone https://github.com/profile-55/NOTES.git
  
 ```
 
-### Устанавливаем виртульное окружение для проекта:
+### 2.2 Устанавливаем виртульное окружение для проекта
 Добавляем виртуальное окружение в папку проекта:
 ```
 python -m venv path/to/project/venv
@@ -52,27 +52,34 @@ cd path/to/project/
 venv/Sctipts/activate.bat (для Windows)
 venv/bin/activate (для Linux)
 ```
+Устанавливаем зависимости в виртуальное окружение:
+```
+pip install -r requirements.txt
+```
 
-## Запуск Docker-контейнеров
-### Запускаем контейнер для Postgres:
+### 2.3 Запускаем контейнер для Postgres:
 ```
 sudo docker run -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=newp55! -e POSTGRES_DB=tasks_base -d -p 5432:5432 postgres:latest
 ```
 
-### Собираем Docker-образ для python и uvicorn
-Для того чтобы собрать Docker-образ переходим в каталог, содержащий Dockerfile, и выполняем следующую команду:
+### 2.4 Создаём базу данных
 ```
-sudo docker build . -t app_uvicorn
-```
-
-После запускаем uvicorn-сервер
-```
-sudo docker run -p 8000:8000 app_uvicorn
+python create_db.py
 ```
 
+### 2.5 Запускаем uvicorn-сервер
+Для запуска выполняем следующую команду:
+```
+uvicorn main:app --reload
+```
 
-# 3 Тесты
-### Переходим в контейнер
-
-### Тестируем приложение
+# 3 Тестрирование API
+### 3.1 Встроенный инструментарий FastAPI
+Для тестирования API удобно пользоваться
+инструментами, которые предоставляет
+сам фреймворк FastAPI. Они доступны по следующей
+ссылке:
+```
+http://locahost:8000/docs
+```
 
